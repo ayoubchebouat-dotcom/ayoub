@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayoub — إيقاف التشغيل</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#0b0b0b;color:#fff;font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center}
+.card{width:min(90%,420px);background:#181818;border-radius:24px;padding:32px 24px;text-align:center;box-shadow:0 15px 45px #000}
+h1{margin:0 0 10px;font-size:30px}
+p{color:#bbb;line-height:1.7}
+button{width:100%;padding:16px;margin-top:15px;border:0;border-radius:14px;background:#2563eb;color:#fff;font-size:19px}
+#confirm{display:none}
+.shutdown{display:none;position:fixed;inset:0;background:#000;align-items:center;justify-content:center;flex-direction:column;text-align:center}
+.spinner{width:42px;height:42px;border:4px solid #333;border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:25px}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="card" id="main">
+  <h1>Ayoub</h1>
+  <p>هل تريد إيقاف تشغيل الهاتف؟</p>
+  <button onclick="showConfirm()">إيقاف التشغيل</button>
+</div>
+
+<div class="card" id="confirm">
+  <h1>تأكيد</h1>
+  <p>هذا مجرد محاكاة آمنة. الهاتف لن ينطفئ فعليًا.</p>
+  <button onclick="fakeShutdown()">تأكيد إيقاف التشغيل</button>
+  <button onclick="cancel()" style="background:#374151">إلغاء</button>
+</div>
+
+<div class="shutdown" id="shutdown">
+  <div class="spinner"></div>
+  <h2>جارٍ إيقاف التشغيل...</h2>
+  <p>محاكاة فقط — الهاتف لم يتم إيقافه.</p>
+</div>
+
+<script>
+function showConfirm(){
+ document.getElementById("main").style.display="none";
+ document.getElementById("confirm").style.display="block";
+}
+function cancel(){
+ document.getElementById("confirm").style.display="none";
+ document.getElementById("main").style.display="block";
+}
+function fakeShutdown(){
+ document.getElementById("confirm").style.display="none";
+ document.getElementById("shutdown").style.display="flex";
+ setTimeout(()=>{
+   document.getElementById("shutdown").innerHTML="<h2>الهاتف متوقف</h2><p>هذه محاكاة فقط. اضغط رجوع للعودة.</p>";
+ },2500);
+}
+</script>
+</body>
+</html>
